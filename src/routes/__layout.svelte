@@ -2,7 +2,7 @@
 	import Navbar from '../layouts/navbar.svelte';
 </script>
 
-<div class="p8 max-w-2xl mx-auto">
+<div class="p-8 max-w-6xl mx-auto">
 	<header class=" py-3 ">
 		<Navbar />
 	</header>
