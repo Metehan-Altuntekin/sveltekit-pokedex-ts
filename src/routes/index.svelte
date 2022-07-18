@@ -6,6 +6,7 @@
 	// stores
 	import { pokemon, fetchPokemon } from '../stores/pokestore'
 	// components
+	import PokemonList from '../components/PokemonList.svelte'
 	import PokemanCard from '../components/PokemanCard.svelte'
 
 	// Filter by name
@@ -64,15 +65,7 @@
 		</div>
 	</div>
 
-	<div class="pokelist">
-		<ul class="py-4 grid gap-4  grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
-			{#each filteredPokemon as pokeman}
-				<li>
-					<PokemanCard {pokeman} />
-				</li>
-			{/each}
-		</ul>
-	</div>
+	<PokemonList pokemon={filteredPokemon} />
 </div>
 
 <style>
