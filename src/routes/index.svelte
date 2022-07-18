@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	// stores
-	import { pokemon } from '../stores/pokestore';
 	import { pokemon, fetchPokemon } from '../stores/pokestore';
 	// components
 	import PokemanCard from '../components/PokemanCard.svelte';
