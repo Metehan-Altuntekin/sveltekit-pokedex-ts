@@ -1,4 +1,4 @@
-import { writable } from 'svelte/store'
+import { writable, get } from 'svelte/store'
 // types
 import type { Writable } from 'svelte/store'
 import type { Pokeman } from '../types'
@@ -6,7 +6,13 @@ import type { Pokeman } from '../types'
 export const pokemon: Writable<Pokeman[]> = writable([])
 
 export async function fetchPokemon(num = 10) {
-	const url = `https://pokeapi.co/api/v2/pokemon?limit=${num}`
+	const url = get(pokemon).length
+		? `https://pokeapi.co/api/v2/pokemon?limit=${num - get(pokemon).length}&offset=${
+				get(pokemon).length
+		  }`
+		: `https://pokeapi.co/api/v2/pokemon?limit=${num}`
+
+	console.log(url)
 
 	const res = await fetch(url)
 	const data = await res.json()
@@ -14,14 +20,14 @@ export async function fetchPokemon(num = 10) {
 		(data: { name: string; url: string }, index: number) => {
 			return {
 				name: data.name,
-				id: index + 1,
+				id: get(pokemon).length + index + 1,
 				image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-					index + 1
+					get(pokemon).length + index + 1
 				}.png`
 			}
 		}
 	)
 
-	pokemon.set(loadedPokemon)
+	pokemon.set([...get(pokemon), ...loadedPokemon])
 }
 fetchPokemon()
