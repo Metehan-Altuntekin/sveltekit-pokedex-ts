@@ -1,19 +1,19 @@
 <script context="module" lang="ts">
 	export async function load({ params }: { params: { id: number } }) {
-		const id = params.id;
-		const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-		const res = await fetch(url);
-		const pokeman = await res.json();
-		return { props: { pokeman } };
+		const id = params.id
+		const url = `https://pokeapi.co/api/v2/pokemon/${id}`
+		const res = await fetch(url)
+		const pokeman = await res.json()
+		return { props: { pokeman } }
 	}
 </script>
 
 <script lang="ts">
 	// types
-	import type { PokemanDetails } from '../../types';
+	import type { PokemanDetails } from '../../types'
 
-	export let pokeman: PokemanDetails;
-	const type: string = pokeman.types[0].type.name;
+	export let pokeman: PokemanDetails
+	const type: string = pokeman.types[0].type.name
 </script>
 
 <svelte:head>

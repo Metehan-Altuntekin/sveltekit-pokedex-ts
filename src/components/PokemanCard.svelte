@@ -1,8 +1,8 @@
 <script lang="ts">
 	// types
-	import type { Pokeman } from '../types';
+	import type { Pokeman } from '../types'
 
-	export let pokeman: Pokeman;
+	export let pokeman: Pokeman
 </script>
 
 <a
