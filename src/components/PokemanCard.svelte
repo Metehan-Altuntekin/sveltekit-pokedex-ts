@@ -8,11 +8,13 @@ import type { Pokeman } from '../types'
 export let pokeman: Pokeman
 
 const { name, image, id } = pokeman
+
+$: isFavorite = $favorites.includes(id)
 </script>
 
 <div class="pokeman-container relative">
 	<a
-		href="/pokemon/{pokeman.id}"
+		href="/pokemon/{id}"
 		sveltekit:noscroll
 		class="p-6 bg-gray-100 text-gray-800 text-center rounded-md shadow-sm hover:shadow-md flex flex-col items-center relative"
 	>
@@ -21,16 +23,14 @@ const { name, image, id } = pokeman
 	</a>
 	<button
 		on:click={() => switchFavorite(id)}
-		class="fav-button {$favorites.includes(id)
-			? ''
-			: 'hidden'} rounded-md overflow-hidden absolute right-5 top-5"
+		class="fav-button {!isFavorite && 'hidden'} rounded-md overflow-hidden absolute right-5 top-5"
+		title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
 	>
 		<IconifyIcon
-			class="iconify bg-gray-200 p-1 text-4xl md:text-5xl {$favorites.includes(id)
+			class="iconify bg-gray-200 p-1 text-4xl md:text-5xl {isFavorite
 				? 'text-fuchsia-600'
 				: 'text-fuchsia-300'}"
 			icon="ic:round-favorite"
-			title={$favorites.includes(id) ? 'Remove from favorites' : 'Add to favorites'}
 		/>
 	</button>
 </div>
