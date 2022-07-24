@@ -33,6 +33,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@iconify/iconify": "^2.2.1"
+		"@iconify/svelte": "^2.2.1"
 	}
 }

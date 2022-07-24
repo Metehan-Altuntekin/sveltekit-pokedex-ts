@@ -16,3 +16,5 @@ export let pokemon: Pokeman[]
 		{/each}
 	</ul>
 </div>
+
+<!-- TODO pagination with SSR support -->

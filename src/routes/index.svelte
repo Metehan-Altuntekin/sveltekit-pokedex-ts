@@ -1,36 +1,36 @@
 <script lang="ts">
-	import { fade } from 'svelte/transition'
-	import Iconify from '@iconify/iconify'
-	// types
-	import type { Pokeman } from '../types'
-	// stores
-	import { pokemon, fetchPokemon } from '../stores/pokestore'
-	// components
-	import PokemonList from '../components/PokemonList.svelte'
-	import PokemanCard from '../components/PokemanCard.svelte'
+import { fade } from 'svelte/transition'
+import IconifyIcon from '@iconify/svelte'
+// types
+import type { Pokeman } from '../types'
+// stores
+import { pokemon, fetchPokemon } from '../stores/pokestore'
+// components
+import PokemonList from '../components/PokemonList.svelte'
+import PokemanCard from '../components/PokemanCard.svelte'
 
-	// Filter by name
-	let searchTerm: string
-	let filteredPokemon: Pokeman[]
+// Filter by name
+let searchTerm: string
+let filteredPokemon: Pokeman[]
 
-	$: {
-		if (searchTerm) {
-			filteredPokemon = $pokemon.filter((pokeman) =>
-				pokeman.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())
-			)
-		} else {
-			filteredPokemon = [...$pokemon]
-		}
+$: {
+	if (searchTerm) {
+		filteredPokemon = $pokemon.filter((pokeman) =>
+			pokeman.name.toLocaleLowerCase().includes(searchTerm.toLocaleLowerCase())
+		)
+	} else {
+		filteredPokemon = [...$pokemon]
 	}
+}
 
-	// Pokemon quantity
-	let pokemonQty: number = $pokemon.length || 10
+// Pokemon quantity
+let pokemonQty: number = $pokemon.length || 10
 
-	$: {
-		console.log({ pokemonQty })
-		if (pokemonQty > $pokemon.length) fetchPokemon(pokemonQty)
-		if (pokemonQty < $pokemon.length) $pokemon = $pokemon.slice(0, pokemonQty)
-	}
+$: {
+	console.log({ pokemonQty })
+	if (pokemonQty > $pokemon.length) fetchPokemon(pokemonQty)
+	if (pokemonQty < $pokemon.length) $pokemon = $pokemon.slice(0, pokemonQty)
+}
 </script>
 
 <svelte:head>
@@ -51,7 +51,7 @@
 		<!-- Pokemon quantity  -->
 		<div class="flex  bg-blue-500 rounded-md justify-between">
 			<button on:click={() => pokemonQty--} class="p-1 text-3xl  text-white hover:bg-gray-100/20 "
-				><span class="iconify text-white" data-icon="eva:minus-square-fill" /></button
+				><IconifyIcon class=" text-white" icon="eva:minus-square-fill" /></button
 			>
 			<input
 				type="number"
@@ -60,7 +60,7 @@
 				class="p-4 appearance-none bg-transparent text-white align-middle text-center font-semibold text-xl max-w-10 min-w-0"
 			/>
 			<button on:click={() => pokemonQty++} class="p-1 text-3xl  text-white hover:bg-gray-100/20 "
-				><span class="iconify text-white" data-icon="eva:plus-square-fill" /></button
+				><IconifyIcon class=" text-white" icon="eva:plus-square-fill" /></button
 			>
 		</div>
 	</div>
@@ -69,13 +69,13 @@
 </div>
 
 <style>
-	/* For disabling HTML arrows on number input*/
-	input::-webkit-outer-spin-button,
-	input::-webkit-inner-spin-button {
-		-webkit-appearance: none;
-		margin: 0;
-	}
-	input[type='number'] {
-		-moz-appearance: textfield;
-	}
+/* For disabling HTML arrows on number input*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+input[type='number'] {
+	-moz-appearance: textfield;
+}
 </style>
