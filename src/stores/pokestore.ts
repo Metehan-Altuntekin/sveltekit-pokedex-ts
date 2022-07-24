@@ -4,8 +4,11 @@ import type { Writable } from 'svelte/store'
 import type { Pokeman } from '../types'
 
 export const pokemon: Writable<Pokeman[]> = writable([])
+export const loading: Writable<boolean> = writable(false)
 
 export async function fetchPokemon(num = 10) {
+	loading.set(true)
+
 	const url = get(pokemon).length
 		? `https://pokeapi.co/api/v2/pokemon?limit=${num - get(pokemon).length}&offset=${
 				get(pokemon).length
@@ -29,5 +32,8 @@ export async function fetchPokemon(num = 10) {
 	)
 
 	pokemon.set([...get(pokemon), ...loadedPokemon])
+
+	loading.set(false)
 }
+
 fetchPokemon()
