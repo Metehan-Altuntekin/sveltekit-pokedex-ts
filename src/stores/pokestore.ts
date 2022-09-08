@@ -31,7 +31,7 @@ export async function fetchPokemon(num = 10) {
 		}
 	)
 
-	pokemon.set([...get(pokemon), ...loadedPokemon])
+	pokemon.update((curr): Pokeman[] => [...curr, ...loadedPokemon])
 
 	loading.set(false)
 }

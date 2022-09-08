@@ -28,7 +28,7 @@ $: isFavorite = $favorites.includes(id)
 	>
 		<IconifyIcon
 			class="iconify bg-gray-200 p-1 text-4xl md:text-5xl {isFavorite
-				? 'text-fuchsia-600'
+				? 'text-fuchsia-500'
 				: 'text-fuchsia-300'}"
 			icon="ic:round-favorite"
 		/>
